@@ -140,9 +140,19 @@
             </div>
 
             <div class="form-group">
-                <label for="operacao">Operação matemática:</label>
-                <input type="text" name="operacao" id="operacao" class="input-field" 
-                       placeholder="+ - . /" maxlength="1" required>
+                <label>Operação matemática:</label>
+                <label>+
+                <input type="radio" name="operacao" value="+">
+                </label>
+                <label>- 
+                <input type="radio" name="operacao" value="-">
+                </label>
+                <label>x
+                <input type="radio" name="operacao" value=".">
+                </label>
+                <label>÷
+                <input type="radio" name="operacao" value="/">
+                </label>
             </div>
 
             <button type="submit">Calcular →</button>
@@ -161,6 +171,7 @@
                 $resultado = $one + $two;
                 $mensagem = "Adição: $one + $two = <strong>".number_format($resultado, 2)."</strong>";
                 $classe_resultado = 'sucesso';
+
             } elseif ($operador == '-') {
                 $resultado = $one - $two;
                 $mensagem = "Subtração: $one - $two = <strong>".number_format($resultado, 2)."</strong>";
