@@ -65,7 +65,7 @@
                 return $soma;
             }
 
-            // Calcular e exibir
+
             echo '<div class="resultado">';
             echo 'Média com FOR: ' . number_format(calcularSoma($notas, 1)/count($notas), 2, ',', '.') . '<br>';
             echo 'Média com WHILE: ' . number_format(calcularSoma($notas, 2)/count($notas), 2, ',', '.') . '<br>';
