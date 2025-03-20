@@ -83,10 +83,19 @@
             $soma_while = 0;
             $i = $menor;
             while($i <= $maior) {
-                $soma_for += $i;
+                $soma_while += $i;
                 $i++;
             }
             echo "<div class='result'><p>Soma usando o for: $soma_while</p> </div>";
+            echo "Tem um tolal de $quantidade_termos termos";
+
+            $soma_do_while = 0;
+            $i = $menor;
+            do {
+                $soma_do_while += $i;
+                $i++; 
+            } while($i <= $maior);
+            echo "<div class='result'><p>Soma usando o for: $soma_do_while</p> </div>";
             echo "Tem um tolal de $quantidade_termos termos";
 
        
