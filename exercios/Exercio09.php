@@ -1,81 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Calculadora de Médias</title>
-    <style>
-        body { font-family: Arial; max-width: 500px; margin: 20px auto; padding: 20px; }
-        form { background: #f0f0f0; padding: 20px; border-radius: 8px; }
-        input, button { padding: 8px; margin: 5px 0; width: 100%; }
-        .resultado { margin-top: 20px; padding: 15px; background: #e0ffe0; }
-        .erro { background: #ffe0e0; }
-    </style>
+    <meta charset="UTF-8">
+    <title>Calcular Média de Notas</title>
 </head>
 <body>
+    <h2>Insira as notas separadas por vírgula:</h2>
     <form method="post">
-        <h3>Digite as notas (separadas por espaço ou vírgula):</h3>
-        <input type="text" name="notas" placeholder="Ex: 7 8 9" required>
-        <button type="submit">Calcular</button>
+        <input type="text" name="notas" placeholder="Ex: 7.5, 8, 6.5" required>
+        <button type="submit">Calcular Média</button>
     </form>
+</body>
+
 
     <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $input = str_replace(',', ' ', $_POST['notas']);
-        $notas = explode(' ', $input);
-        $valido = true;
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $notasInput = $_POST["notas"];
+        $notas = array_map('floatval', explode(',', $notasInput));
+        $totalNotas = count($notas);
         
-
-        foreach ($notas as &$nota) {
-            $nota = trim($nota);
-            if (!is_numeric($nota) || $nota < 0 || $nota > 10) {
-                $valido = false;
-                break;
-            }
-            $nota = (float)$nota;
+        if ($totalNotas == 0) {
+            echo "<p>Nenhuma nota foi inserida.</p>";
+            exit;
         }
 
-        if ($valido && !empty($notas)) {
 
-            function calcularSoma($notas, $tipo) {
-                $soma = 0;
-                $total = count($notas);
-
-                if ($tipo == 1) {
-                    for ($i = 0; $i < $total; $i++) {
-                        $soma += $notas[$i];
-                    }
-                }
-
-                elseif ($tipo == 2) {
-                    $i = 0;
-                    while ($i < $total) {
-                        $soma += $notas[$i];
-                        $i++;
-                    }
-                }
-
-                else {
-                    $i = 0;
-                    if ($total > 0) {
-                        do {
-                            $soma += $notas[$i];
-                            $i++;
-                        } while ($i < $total);
-                    }
-                }
-                return $soma;
-            }
-
-
-            echo '<div class="resultado">';
-            echo 'Média com FOR: ' . number_format(calcularSoma($notas, 1)/count($notas), 2, ',', '.') . '<br>';
-            echo 'Média com WHILE: ' . number_format(calcularSoma($notas, 2)/count($notas), 2, ',', '.') . '<br>';
-            echo 'Média com DO-WHILE: ' . number_format(calcularSoma($notas, 3)/count($notas), 2, ',', '.'); 
-            echo '</div>';
-            
-        } else {
-            echo '<div class="resultado erro">Digite apenas números entre 0 e 10!</div>';
+        function validarNota($nota) {
+            return ($nota >= 0 && $nota <= 10);
         }
+
+
+        foreach ($notas as $nota) {
+            if (!validarNota($nota)) {
+                echo "<p>Nota inválida: $nota (deve ser entre 0 e 10).</p>";
+                exit;
+            }
+        }
+
+
+        $somaFor = 0;
+        for ($i = 0; $i < $totalNotas; $i++) {
+            $somaFor += $notas[$i];
+        }
+        $mediaFor = $somaFor / $totalNotas;
+
+
+        $somaWhile = 0;
+        $contadorWhile = 0;
+        while ($contadorWhile < $totalNotas) {
+            $somaWhile += $notas[$contadorWhile];
+            $contadorWhile++;
+        }
+        $mediaWhile = $somaWhile / $totalNotas;
+
+
+        $somaDoWhile = 0;
+        $contadorDoWhile = 0;
+        if ($totalNotas > 0) {
+            do {
+                $somaDoWhile += $notas[$contadorDoWhile];
+                $contadorDoWhile++;
+            } while ($contadorDoWhile < $totalNotas);
+        }
+        $mediaDoWhile = $somaDoWhile / $totalNotas;
+
+
+        echo "<h3>Resultados:</h3>";
+        echo "<p>Notas inseridas: " . implode(', ', $notas) . "</p>";
+        echo "<p>Média usando FOR: " . number_format($mediaFor, 2) . "</p>";
+        echo "<p>Média usando WHILE: " . number_format($mediaWhile, 2) . "</p>";
+        echo "<p>Média usando DO-WHILE: " . number_format($mediaDoWhile, 2) . "</p>";
+    } else {
+        echo "<p>Acesso inválido. Volte ao formulário.</p>";
     }
     ?>
-</body>
+
 </html>
