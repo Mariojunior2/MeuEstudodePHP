@@ -28,7 +28,6 @@
             $count_dowhile = 0;
             $length = strlen($frase);
 
-            // Usando FOR
             if ($length > 0) {
                 $count_for = 1;
                 for ($i = 0; $i < $length - 1; $i++) {
@@ -38,7 +37,7 @@
                 }
             }
 
-            // Usando WHILE
+
             if ($length > 0) {
                 $count_while = 1;
                 $i = 0;

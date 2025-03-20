@@ -22,7 +22,7 @@
         if ($n <= 0) {
             echo "<p class='error'>Por favor, informe um número inteiro positivo.</p>";
         } else {
-            // Usando FOR
+
             $multiplesFor = [];
             for ($i = $n; $i <= 100; $i += $n) {
                 $multiplesFor[] = $i;
@@ -36,7 +36,7 @@
                 $i += $n;
             }
             
-            // Usando DO-WHILE (corrigido)
+
             $multiplesDoWhile = [];
             $i = $n;
             do {

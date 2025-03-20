@@ -9,8 +9,7 @@
 </head>
 <body>
     <h2>Conversão de Celsius para Fahrenheit</h2>
-    
-    <!-- Formulário para entrada do número -->
+
     <form method="post">
         Digite um número inteiro: 
         <input type="number" name="numero" required>

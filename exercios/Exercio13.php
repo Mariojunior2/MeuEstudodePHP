@@ -49,7 +49,7 @@
             }
             $resultados[] = "DO-WHILE: $n! = $fatorial_dowhile";
 
-            // Exibir resultados
+
             echo "<div class='resultado'>";
             foreach ($resultados as $resultado) {
                 echo "<p>$resultado</p>";
