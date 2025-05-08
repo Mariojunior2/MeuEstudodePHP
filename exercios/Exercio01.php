@@ -159,30 +159,33 @@
         </form>
 
         <?php 
+        require_once 'Exercio01_B.php';
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $one = floatval($_POST['NumberOne']);
             $two = floatval($_POST['NumberTwo']);
             $operador = trim($_POST['operacao']);
 
+            
+
             $classe_resultado = '';
             $mensagem = '';
 
             if ($operador == '+') {
-                $resultado = $one + $two;
+                $resultado = soma($one, $two);
                 $mensagem = "Adição: $one + $two = <strong>".number_format($resultado, 2)."</strong>";
                 $classe_resultado = 'sucesso';
 
             } elseif ($operador == '-') {
-                $resultado = $one - $two;
+                $resultado = subtrair($one, $two);
                 $mensagem = "Subtração: $one - $two = <strong>".number_format($resultado, 2)."</strong>";
                 $classe_resultado = 'sucesso';
             } elseif ($operador == '.') {
-                $resultado = $one * $two;
+                $resultado = mutiplic($one, $two);
                 $mensagem = "Multiplicação: $one × $two = <strong>".number_format($resultado, 2)."</strong>";
                 $classe_resultado = 'sucesso';
             } elseif ($operador == '/') {
                 if($two != 0) {
-                    $resultado = $one / $two;
+                    $resultado = dividir($one, $two);
                     $mensagem = "Divisão: $one ÷ $two = <strong>".number_format($resultado, 2)."</strong>";
                     $classe_resultado = 'sucesso';
                 } else {

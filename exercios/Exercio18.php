@@ -3,17 +3,33 @@
 <head>
    <title>Exemplo</title>
    <meta charset = "UTF-8">
+   <style>
+        .div {
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .form {
+            padding: 100px;
+        }
+   </style>
 </head>
-<body>
-   <form action="" method="post" >
-      Primeiro Numero: <input name="num1" type="text"><br>
-      Segundo numero: <input name="num2" type="text"><br>
-      <input type="submit" name="operacao" value="+">     
-      <input type="submit" name="operacao" value="-">     
-      <input type="submit" name="operacao" value="*">     
-      <input type="submit" name="operacao" value="/">     
+<body class="div">
+    <h1>Calculadora</h1>
+   <form action="" method="post" class="form">
+      Primeiro Numero: <input name="num1" type="text" required><br>
+      Segundo numero: <input name="num2" type="text" required><br>
+      <select name="operacao">
+      <option  name="operacao" value="+">+</option>
+      <option  name="operacao" value="-">-</option>     
+      <option  name="operacao" value="*">*</option>     
+      <option  name="operacao" value="/">/</option>
+      </select>     
+      <input type="submit">
    </form> 
 <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
     if (!isset($_POST['num1']) || !isset($_POST['num2'])) {
         exit;
     }
@@ -62,6 +78,7 @@
     } else {
         echo "Operação inválida.";
     }
+}
 
 ?>       
 </body>
